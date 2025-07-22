@@ -3,10 +3,9 @@
 ##### log_col_silentv4_latest.zip #####
 
 - Extract the original
-
 - Logs fecthed are saved primarily on C:\Windows\temp; if not available, they will be on C:\temp
-
 - No logging is done
+- Very fast, can run silently, no parameters
 
 
 
@@ -14,7 +13,7 @@
 
   - Has a GUI
   - Choose the needed category
-  - N-sight logs are preloaded on the background to improve speed
+  - N-sight logs are preloaded in the background to improve performance
   - Logging is done
   - 7z and logs for the tool/actions are saved in %USERPROFILE%\Desktop
   
