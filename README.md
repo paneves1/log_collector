@@ -1,11 +1,20 @@
-# log_collector
-collect logs
+# log_collectors
+
+##### log_col_silentv4_latest.zip #####
 
 - Extract the original
 
-- Logs are saved primarily on C:\Windows\temp; if not available, they will be on C:\temp
+- Logs fecthed are saved primarily on C:\Windows\temp; if not available, they will be on C:\temp
 
 - No logging is done
+
+
+
+##### ColetorLogsv1_with_log_on_close_latest.zip #####
+
+  - Has a GUI
+  - Choose the needed category
+  - N-sight logs are preloaded on the background to improve speed
+  - Logging is done
+  - 7z and logs for the tool/actions are saved in %USERPROFILE%\Desktop
   
-
-
