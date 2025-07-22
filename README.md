@@ -2,7 +2,6 @@
 
 ##### log_col_silentv4_latest.zip #####
 
-- Extract the original
 - Logs fecthed are saved primarily on C:\Windows\temp; if not available, they will be on C:\temp
 - No logging is done
 - Very fast, can run silently, no parameters
