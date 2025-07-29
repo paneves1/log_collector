@@ -9,10 +9,8 @@ import win32com.client
 import py7zr
 import subprocess
 
-EXCLUDE_EXTENSIONS = ('.dll', '.exe', '.bin', '.msi', '.dat', '.rar', '.gz','cab')
-
-# Function to get the Windows temporary path
-# This function tries to use the primary temp path and falls back to a secondary one if it fails
+EXCLUDE_EXTENSIONS = ('.dll', '.exe', '.bin', '.msi', '.dat', '.rar', '.gz', '.cab')
+MAX_FILE_SIZE = 10 * 1024 * 1024  # 10 MB in bytes
 
 def get_windows_temp_path():
     primary = r"C:\Windows\Temp"
@@ -26,13 +24,8 @@ def get_windows_temp_path():
         return fallback
 
 
-
 def export_event_logs(output_dir):
-    logs_to_export = [
-        "Application",
-        "System",
-        "Security"
-    ]
+    logs_to_export = ["Application", "System", "Security"]
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     logs_dir = os.path.join(output_dir, "EventLogs")
     os.makedirs(logs_dir, exist_ok=True)
@@ -79,8 +72,7 @@ categories = {
         os.path.expandvars(r"%ProgramData%\MspPlatform\FileCacheServiceAgent\log"),
         os.path.expandvars(r"%ProgramData%\MspPlatform\PME.Agent.PmeService\log"),
         os.path.expandvars(r"%ProgramData%\MspPlatform\RequestHandlerAgent\log"),
-        os.path.expandvars(r"%ProgramData%\AdvancedMonitoringAgentWebProtection"),
-        os.path.expandvars(r"%ProgramData%\AdvancedMonitoringAgentNetworkManagement"),
+        os.path.expandvars(r"%ProgramData%\GetSupportService_LOGICnow"),
     ],
     "Take Control Viewer": [
         os.path.expandvars(r"%LOCALAPPDATA%\Take Control Viewer\Logs\\"),
@@ -104,23 +96,36 @@ def copy_selected_items(destination_folder):
 
         for path in paths:
             try:
-                if callable(path):  # Export Event logs
+                if callable(path):  # Export event logs
                     result_path = path(temp_subfolder)
                     if os.path.exists(result_path) and os.listdir(result_path):
                         copied_any = True
                         files_copied = True
+
                 elif os.path.isfile(path):
-                    if not path.lower().endswith(EXCLUDE_EXTENSIONS):
+                    if (
+                        not path.lower().endswith(EXCLUDE_EXTENSIONS)
+                        and os.path.getsize(path) <= MAX_FILE_SIZE
+                    ):
                         os.makedirs(temp_subfolder, exist_ok=True)
                         shutil.copy2(path, temp_subfolder)
                         copied_any = True
                         files_copied = True
+
                 elif os.path.isdir(path) and os.listdir(path):
                     dest = os.path.join(temp_subfolder, os.path.basename(path))
                     os.makedirs(os.path.dirname(dest), exist_ok=True)
 
-                    def ignore_files(_, filenames):
-                        return [f for f in filenames if f.lower().endswith(EXCLUDE_EXTENSIONS)]
+                    def ignore_files(dir, filenames):
+                        ignored = []
+                        for f in filenames:
+                            full_path = os.path.join(dir, f)
+                            if (
+                                f.lower().endswith(EXCLUDE_EXTENSIONS)
+                                or (os.path.isfile(full_path) and os.path.getsize(full_path) > MAX_FILE_SIZE)
+                            ):
+                                ignored.append(f)
+                        return ignored
 
                     shutil.copytree(path, dest, dirs_exist_ok=True, ignore=ignore_files)
                     copied_any = True
@@ -148,7 +153,7 @@ def create_7z_archive(source_folder, archive_path):
 
 def run_silent():
     temp_dir = tempfile.mkdtemp()
-    desktop_dir = get_windows_temp_path()  # Temporary directory for the archive
+    desktop_dir = get_windows_temp_path()()
     os.makedirs(desktop_dir, exist_ok=True)
 
     archive_name = generate_archive_name()
@@ -165,8 +170,6 @@ def run_silent():
             sys.exit(1)
     else:
         shutil.rmtree(temp_dir, ignore_errors=True)
-        sys.exit(2)
-
         sys.exit(2)
 
 if __name__ == "__main__":
