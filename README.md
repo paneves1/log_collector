@@ -15,4 +15,8 @@
   - N-sight logs are preloaded in the background to improve performance
   - Logging is done
   - 7z and logs for the tool/actions are saved in %USERPROFILE%\Desktop
-  
+
+
+  Not collected on both versions
+
+  C:\ProgramData\GetSupportService_Common\Logs
