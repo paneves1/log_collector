@@ -153,7 +153,7 @@ def create_7z_archive(source_folder, archive_path):
 
 def run_silent():
     temp_dir = tempfile.mkdtemp()
-    desktop_dir = get_windows_temp_path()()
+    desktop_dir = get_windows_temp_path()
     os.makedirs(desktop_dir, exist_ok=True)
 
     archive_name = generate_archive_name()
@@ -174,3 +174,4 @@ def run_silent():
 
 if __name__ == "__main__":
     run_silent()
+
