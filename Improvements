@@ -2,7 +2,9 @@
 
 
 - Collect C:\ProgramData\GetSupportService_Common\Logs
+
 - Improve folder structure in 7z
+
 - Clean all cache
 {                # Clean temporary after copying
                 shutil.rmtree(temp_logs, ignore_errors=True)
