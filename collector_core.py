@@ -60,7 +60,7 @@ categories = {
         os.path.expandvars(r"C:\ProgramData\N-able Technologies\AutomationManager\scripts"),
     ],
     "MSP Core": [
-        os.path.expandvars(r"C:\Program Files (x86)\Msp Agent"),
+        os.path.expandvars(r"C:\Program Files (x86)\Msp Agent\logs"),
     ],
     "Vulnerability Management": [
         os.path.expandvars(r"C:\Program Files (x86)\Msp Agent\Components\software-scanner"),
@@ -330,3 +330,5 @@ def create_gui():
 if __name__ == "__main__":
     logging.info(f"Running with administrator privileges: {'Yes' if is_admin() else 'No'}")
     create_gui()
+#
+
