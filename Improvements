@@ -5,7 +5,7 @@
 
 - Improve folder structure in 7z
 
-- Clean all cache
+- Clean all cache for silent version
 {                # Clean temporary after copying
                 shutil.rmtree(temp_logs, ignore_errors=True)
 }
