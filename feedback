@@ -1,1 +1,11 @@
 feedback
+
+# Add option to select all categories or select all by default
+
+CODE
+REPLACE 
+var = tk.BooleanVar
+for
+var = tk.BooleanVar(value=True)
+
+Result : all categories pre-selected
