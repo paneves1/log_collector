@@ -10,6 +10,6 @@
                 shutil.rmtree(temp_logs, ignore_errors=True)
 }
 
-- Select all categories by default except for Take Control Against and Console (standalone) - GUI version IMPLEMENTED in staging
+- Select all categories by default except for Take Control Agent and Console (standalone) - GUI version IMPLEMENTED in staging
 
 - Include gz files so backlog for TC can be fetched GUI and silent versions - IMPLEMENTED on staging
