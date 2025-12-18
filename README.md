@@ -22,7 +22,7 @@
   C:\ProgramData\GetSupportService_Common\Logs
 
 
-Release Notes – Version 2.0
+##### Release Notes – Version 2.0 #####
 Release Date: 30-10-2025
 
 New Features & Improvements
