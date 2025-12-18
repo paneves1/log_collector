@@ -20,3 +20,14 @@
   Not collected on both versions
 
   C:\ProgramData\GetSupportService_Common\Logs
+
+
+Release Notes – Version 2.0
+Release Date: 30-10-2025
+
+New Features & Improvements
+Added an option to select all features except for Take Control, selected by default.
+
+Gzip log files are now included when gathering Take Control backlog data.
+
+The folder C:\ProgramData\GetSupportService_Common\Logs is now fetched — providing additional useful data for Take Control analysis.
